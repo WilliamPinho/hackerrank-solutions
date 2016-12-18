@@ -12,7 +12,7 @@ string convertFromAMPMtoMilitary(string time)
       return time.substr(0,8);
     }
   }
-  bool isPM = time[8] == 'P';                                       // We whether the time is PM or not. We do not need to do anything in case it is AM.
+  bool isPM = time[8] == 'P';                                       // We check whether the time is PM or not. We do not need to do anything in case it is AM.
   time.pop_back();                                                  // After we have this information, we can remove the last two characters from our final answer.
   time.pop_back();
   if(isPM) {
