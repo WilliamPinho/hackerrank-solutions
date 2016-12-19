@@ -9,27 +9,17 @@ inline long lcm(long x, long y) {
   return x*(y/gcd(x,y));
 }
 
-inline long lcmOf(int n) {                                   // Calculates the lcm of n elements read from the input stream
-  long lcmX, x;
-  cin >> lcmX;
+inline long forAllElements(long (* f)(long,long), int n) {
+  long fX, x;
+  cin >> fX;
   for(long i = 0; i < n - 1; ++i) {
     cin >> x;
-    lcmX = lcm(lcmX,x);
+    fX = f(fX,x);
   }
-  return lcmX;
+  return fX;
 }
 
-inline long gcdOf(int n) {                                   // Calculates the gcd of n elements read from the input stream
-  long gcdX, x;
-  cin >> gcdX;
-  for(long i = 0; i < n - 1; ++i) {
-    cin >> x;
-    gcdX = gcd(gcdX,x);
-  }
-  return gcdX;
-}
-
-inline int commonMultipleAndDivisor(long x, long y) {        // Calculates the number of elements that are simultaneously multiples of x and divisors of y 
+inline int commonMultipleAndDivisor(long x, long y) {        // Computes the number of elements that are simultaneously multiples of x and divisors of y 
   int count = 0;
   for(long i = x; i <= y; ++i) {
     if(y%i == 0 && i%x == 0) {
@@ -43,8 +33,8 @@ int main() {
   int sizeA, sizeB;
   cin >> sizeA >> sizeB;
   int count = 0;
-  long lcmA = lcmOf(sizeA);
-  long gcdB = gcdOf(sizeB);
+  long lcmA = forAllElements(&lcm, sizeA);                   // Calculates lcm of all elements
+  long gcdB = forAllElements(&gcd, sizeB);                   // Calculates gcd of all elements
   cout << commonMultipleAndDivisor(lcmA,gcdB);
   return 0;
 }
